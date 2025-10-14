@@ -1,0 +1,56 @@
+CREATE DATABASE CRUD;
+USE CRUD;
+
+CREATE TABLE PROFILE_ (
+USERNAME VARCHAR(40) PRIMARY KEY,
+PASSWORD_ VARCHAR(40),
+EMAIL VARCHAR(40),
+USER_CODE INT,
+NAME_ VARCHAR(40),
+TELEPHONE INT,
+SURNAME VARCHAR(40)
+);
+
+CREATE TABLE USER_ (
+USERNAME VARCHAR(40) PRIMARY KEY,
+PASSWORD_ VARCHAR(40),
+EMAIL VARCHAR(40),
+USER_CODE INT,
+NAME_ VARCHAR(40),
+TELEPHONE INT,
+SURNAME VARCHAR(40),
+GENDER VARCHAR(40),
+CARD_NUMBER INT,
+FOREIGN KEY (USERNAME) REFERENCES PROFILE_ (USERNAME)
+);
+
+CREATE TABLE ADMIN_ (
+USERNAME VARCHAR(40) PRIMARY KEY,
+PASSWORD_ VARCHAR(40),
+EMAIL VARCHAR(40),
+USER_CODE INT,
+NAME_ VARCHAR(40),
+TELEPHONE INT,
+SURNAME VARCHAR(40),
+CURRENT_ACOUNT VARCHAR(40),
+FOREIGN KEY (USERNAME) REFERENCES PROFILE_ (USERNAME)
+);
+
+INSERT INTO PROFILE_ (USERNAME, PASSWORD_, EMAIL, USER_CODE, NAME_, TELEPHONE, SURNAME)
+VALUES
+('jlopez', 'pass123', 'jlopez@example.com', 101, 'Juan', 987654321, 'Lopez'),
+('mramirez', 'pass456', 'mramirez@example.com', 102, 'Maria', 912345678, 'Ramirez'),
+('cperez', 'pass789', 'cperez@example.com', 103, 'Carlos', 934567890, 'Perez'),
+('asanchez', 'qwerty', 'asanchez@example.com', 104, 'Ana', 900112233, 'Sanchez'),
+('rluna', 'zxcvbn', 'rluna@example.com', 105, 'Rosa', 955667788, 'Luna');
+
+INSERT INTO USER_ (USERNAME, PASSWORD_, EMAIL, USER_CODE, NAME_, TELEPHONE, SURNAME, GENDER, CARD_NUMBER)
+VALUES
+('jlopez', 'pass123', 'jlopez@example.com', 101, 'Juan', 987654321, 'Lopez', 'Masculino', 12345678),
+('mramirez', 'pass456', 'mramirez@example.com', 102, 'Maria', 912345678, 'Ramirez', 'Femenino', 87654321),
+('cperez', 'pass789', 'cperez@example.com', 103, 'Carlos', 934567890, 'Perez', 'Masculino', 23456789);
+
+INSERT INTO ADMIN_ (USERNAME, PASSWORD_, EMAIL, USER_CODE, NAME_, TELEPHONE, SURNAME, CURRENT_ACOUNT)
+VALUES
+('asanchez', 'qwerty', 'asanchez@example.com', 104, 'Ana', 900112233, 'Sanchez', 'CTA-001'),
+('rluna', 'zxcvbn', 'rluna@example.com', 105, 'Rosa', 955667788, 'Luna', 'CTA-002');
