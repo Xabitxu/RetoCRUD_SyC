@@ -1,0 +1,14 @@
+div {
+    display:flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+svg {
+    width: 80px;
+}
+
+h1 {
+    display:flex;
+    justify-content: center;
+}
