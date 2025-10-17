@@ -8,6 +8,7 @@
 
 button {
     width: 300px;
+    margin-top: 40px;
     padding: 5px;
     border-radius: 20px;
     background-color:rgb(39, 39, 39);
@@ -15,16 +16,29 @@ button {
     border-color: aliceblue;
 }
 
-.labels {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 80px;
+.texto-centrado {
+    text-align: end; 
+    padding: 5px;
+    background-color: rgb(211, 249, 249);
+    border-radius: 20px;
+    width: 100%;
+}
+
+a {
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 20px;
+    padding:7px;
+}
+
+a:hover {
+    background-color: rgb(179, 252, 252);
 }
 
 .glass-container {
     background: rgba(255, 255, 255, 0.2); 
     border-radius: 20px; 
+    margin-top: 10px;
     backdrop-filter: blur(10px); 
     -webkit-backdrop-filter: blur(10px); 
     padding: 60px 5px;
@@ -51,4 +65,9 @@ body {
     min-height: 70vh;
     padding: 30px;
     font-family: sans-serif;
+}
+
+.goBack {
+    width: 25px;
+    height: 25px;
 }
