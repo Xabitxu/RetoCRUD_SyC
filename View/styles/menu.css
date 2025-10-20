@@ -55,6 +55,8 @@ h1 {
 }
 
 .texto-centrado {
+    background-color: rgb(211, 249, 249);
+    border-radius: 20px;
     text-align: end; 
     padding: 5px;
 }
