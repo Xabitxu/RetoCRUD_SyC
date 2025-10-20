@@ -10,13 +10,41 @@
 }
 
 button {
+    display: inline-block;
+    text-align: center;
     width: 300px;
     padding: 5px;
     border-radius: 20px;
     background-color:rgb(39, 39, 39);
     color: aliceblue;
-    border-color: aliceblue;
+    text-decoration: none;
+    border: 2px solid aliceblue;
+    cursor: pointer;
+    
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
 }
+
+.button-link{
+    display:inline-block;
+    text-align:center;
+    width: 300px;
+    padding: 5px 0;
+    border-radius: 20px;
+    background-color: rgb(39, 39, 39);
+    color: aliceblue;
+    text-decoration: none;
+    border: 2px solid aliceblue;
+    /* match button font exactly */
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
 
 .contenedor-input {
     display: flex;
