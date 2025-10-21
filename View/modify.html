@@ -16,7 +16,7 @@
         <a href=./delete.html class="hover-text">DeleteUser</a>
     </nav>
     <div class="glass-container">
-        <a href=./menu.html class="hover-text"><svg class="goBack" viewBox="0 0 16 16"
+    <a href=./menu.php class="hover-text"><svg class="goBack" viewBox="0 0 16 16"
                 xmlns="http://www.w3.org/2000/svg" fill="#000000">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -27,10 +27,10 @@
                 </g>
             </svg>Go back</a>
         <h1>MODIFY USER</h1>
-        <form action="procesar_login.php" method="post">
+    <form action="../api/auth.php" method="post">
             <div class="contenedor-input">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" required x>
+                <input type="text" id="email" name="email" required>
             </div>
             <div class="contenedor-input">
                 <label for="username">Username</label>
@@ -42,12 +42,12 @@
             </div>
             <div class="contenedor-input">
                 <label for="newPassword">New Password</label>
-                <input type="text" id="newPassword" name="newPassword" required>
+                <input type="password" id="newPassword" name="newPassword" required>
             </div>
 
             <div class="contenedor-input">
                 <label for="confirmNewPassword">Confirm New Password</label>
-                <input type="text" id="confirmNewPassword" name="confirmNewPassword" required>
+                <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
             </div>
 
             <div class="labels">

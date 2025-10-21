@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,6 +11,11 @@
 
 <body class="background">
     <div class="glass-container">
+        <?php if (!empty($_SESSION['flash'])): $flash = $_SESSION['flash']; unset($_SESSION['flash']); ?>
+            <script>
+                alert(<?php echo json_encode($flash); ?>);
+            </script>
+        <?php endif; ?>
         <div class="header-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -24,7 +30,7 @@
             </svg>
         </div>
 
-        <form action="procesar_login.php" method="post">
+    <form action="../api/auth.php" method="post">
             <div class="contenedor-input">
                 <input type="email" id="email" name="email" required placeholder="Email">
             </div>
@@ -63,9 +69,11 @@
                     <button type="submit" name="accion" value="signup">Sign Up</button>
                 </div>
                 <div class="contenedor-input">
-                    <a href="login.html" class="button-link">Login</a>
+                    <a href="login.php" class="button-link">Login</a>
                 </div>
             </div>
         </form>
     </div>
 </body>
+
+</html>
