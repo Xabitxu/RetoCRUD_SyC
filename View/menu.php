@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php session_start();
+if (empty($_SESSION['user'])) {
+    header('Location: ./login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 

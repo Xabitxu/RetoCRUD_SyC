@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -5,7 +6,7 @@
     <link rel="stylesheet" href="styles/delete.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ModifyUser</title>
+    <title>DeleteUser</title>
 </head>
 
 <body class="background">
@@ -26,7 +27,7 @@
                     </path>
                 </g>
             </svg>Go back</a>
-        <h1>MODIFY USER</h1>
+        <h1>DELETE USER</h1>
     <form action="../api/auth.php" method="post">
             <div class="contenedor-input">
                 <label for="email">Email</label>
@@ -34,26 +35,10 @@
             </div>
             <div class="contenedor-input">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" name="username" value="<?= $_SESSION['user']['USERNAME'] ?>" readonly>
             </div>
             <div class="contenedor-input">
-                <label for="telephone">Telephone</label>
-                <input type="text" id="telephone" name="telephone" required>
-            </div>
-            <div class="contenedor-input">
-                <label for="newPassword">New Password</label>
-                <input type="password" id="newPassword" name="newPassword" required>
-            </div>
-
-            <div class="contenedor-input">
-                <label for="confirmNewPassword">Confirm New Password</label>
-                <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
-            </div>
-
-            <div class="labels">
-                <div class="contenedor-input">
-                    <button type="submit" name="accion" value="saveChanges">Save changes</button>
-                </div>
+                <button type="submit" name="accion" value="deleteAccount">Delete Account</button>
             </div>
         </form>
     </div>

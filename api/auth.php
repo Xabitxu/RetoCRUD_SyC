@@ -96,26 +96,8 @@ try {
             $_SESSION['flash'] = 'Error al crear usuario: ' . $e->getMessage();
             redirect('../View/signUp.php');
         }
-    } elseif ($action === 'saveChanges') {
-        $username = $_POST['username'] ?? '';
-        $newPassword = $_POST['newPassword'] ?? '';
-        $confirm = $_POST['confirmNewPassword'] ?? '';
-
-        if ($newPassword !== $confirm) {
-            $_SESSION['flash'] = 'Las contraseñas no coinciden';
-            redirect('../View/modify.html');
-        }
-
-        $userModel->updatePassword($username, $newPassword);
-    $_SESSION['flash'] = 'Contraseña actualizada';
-    redirect('../View/login.php');
-    } elseif ($action === 'deleteAccount') {
-        $username = $_POST['username'] ?? '';
-        $userModel->deleteUser($username);
-    $_SESSION['flash'] = 'Cuenta eliminada';
-    redirect('../View/signUp.php');
     } else {
-        redirect('../View/login.html');
+        redirect('../View/login.php');
     }
 } catch (Exception $e) {
     $_SESSION['flash'] = 'Error: ' . $e->getMessage();

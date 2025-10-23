@@ -47,6 +47,39 @@ class User {
         return $profile;
     }
 
+    public function modifyUser($data) {
+    try {
+        $pdo = $this->dbConnection(); // Asumiendo que tienes un método que devuelve el PDO
+        
+        // Si la contraseña está vacía, no la cambiamos
+        if (empty($data['password'])) {
+            $sql = "UPDATE PROFILE_ 
+                    SET EMAIL = :email, TELEPHONE = :telephone 
+                    WHERE USERNAME = :username";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':email', $data['email']);
+            $stmt->bindParam(':telephone', $data['telephone']);
+            $stmt->bindParam(':username', $data['username']);
+        } else {
+            $sql = "UPDATE PROFILE_ 
+                    SET EMAIL = :email, TELEPHONE = :telephone, PASSWORD_ = :password 
+                    WHERE USERNAME = :username";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':email', $data['email']);
+            $stmt->bindParam(':telephone', $data['telephone']);
+            $stmt->bindParam(':password', $data['password']);
+            $stmt->bindParam(':username', $data['username']);
+        }
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        throw new Exception("Error al modificar el usuario: " . $e->getMessage());
+    }
+    }
+
+    public function deleteUser($data) {
+        
+    }
     public function existsUsernameOrEmail($username, $email) {
         $sql = "SELECT 1 FROM PROFILE_ WHERE USERNAME = :u OR EMAIL = :e LIMIT 1";
         $stmt = $this->conn->prepare($sql);
