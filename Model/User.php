@@ -132,23 +132,6 @@ class User {
         $stmt->execute([':p' => $newHashed, ':u' => $username]);
         return true;
     }
-
-    public function deleteUser($username) {
-        try {
-            $this->conn->beginTransaction();
-            $stmt = $this->conn->prepare("DELETE FROM USER_ WHERE USERNAME = :u");
-            $stmt->execute([':u' => $username]);
-            $stmt = $this->conn->prepare("DELETE FROM ADMIN_ WHERE USERNAME = :u");
-            $stmt->execute([':u' => $username]);
-            $stmt = $this->conn->prepare("DELETE FROM PROFILE_ WHERE USERNAME = :u");
-            $stmt->execute([':u' => $username]);
-            $this->conn->commit();
-            return true;
-        } catch (Exception $e) {
-            $this->conn->rollBack();
-            throw $e;
-        }
-    }
 }
 
 ?>

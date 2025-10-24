@@ -42,14 +42,14 @@
             </div>
             <div class="labels">
                 <div class="contenedor-input">
-                    <button type="submit" name="accion" value="login">Login</button>
+                    <button type="submit" name="accion" value="login" id="login">Login</button>
                 </div>
                 <div class="contenedor-input">
-                    <a href="signUp.php" class="button-link">Sign Up</a>
+                    <a href="signUp.php" class="button-link" id="signup">Sign Up</a>
                 </div>
             </div>
         </form>
     </div>
 </body>
-
+<script src="../js/auth.js"></script>
 </html>

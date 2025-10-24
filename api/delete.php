@@ -2,43 +2,69 @@
 session_start();
 require_once __DIR__ . '/../Model/User.php';
 
-$action = $_POST['accion'] ?? null;
+header('Content-Type: application/json');
+
 $userModel = new User();
 
-function redirect($url) {
-    header('Location: ' . $url);
-    exit;
-}
-
 try {
-    if ($action === 'delete') {    
+    // Comprobar acción
+    $action = $_POST['accion'] ?? null;
 
-        $email = $_POST['email']['EMAIL'] ?? null;
-        $username = $_SESSION['user']['USERNAME'] ?? null; 
-
-        
-
-        $data = [
-            'email' => $email,
-            'username' => $username,
-        ];
-
-        $deleted = $userModel->deleteUser($data);
-
-            if ($deleted) {
-                $_SESSION['flash'] = 'Usuario eliminado correctamente.';
-            
-            redirect('../View/menu.php');
-            } else {
-                $_SESSION['flash'] = 'No se pudo eliminar el usuario.';
-                redirect('../View/delete.php');
-            }
-    } else {
-        redirect('../View/menu.php');
+    if ($action !== 'delete') {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Acción no válida.'
+        ]);
+        exit;
     }
-} catch (Exception $e) {
-    $_SESSION['flash'] = 'Error: ' . $e->getMessage();
-    redirect('../View/menu.php');
-}
 
-?>
+    // Comprobar usuario logueado
+    if (empty($_SESSION['user'])) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'No has iniciado sesión.'
+        ]);
+        exit;
+    }
+
+    $email = $_POST['email'] ?? null;
+    $username = $_SESSION['user']['username'] ?? null; 
+
+    if (!$email) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Email del usuario no proporcionado.'
+        ]);
+        exit;
+    }
+
+    $data = [
+        'email' => $email,
+        'username' => $username
+    ];
+
+    $deleted = $userModel->deleteUser($data);
+
+    if ($deleted) {
+        // Opcional: cerrar sesión si eliminaste al usuario actual
+        if ($username === $_SESSION['user']['username']) {
+            session_destroy();
+        }
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Usuario eliminado correctamente.'
+        ]);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'No se pudo eliminar el usuario.'
+        ]);
+    }
+
+} catch (Exception $e) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error: ' . $e->getMessage()
+    ]);
+}

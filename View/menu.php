@@ -29,8 +29,8 @@ if (empty($_SESSION['user'])) {
         <p></p>
     </main>
 <?php else: ?>
-    <a href="./login.php" class="hover-text">LogIn</a>
-    <a href="./signUp.php" class="hover-text">SignUp</a>
+    <a href="./login.php" class="hover-text" id="login">LogIn</a>
+    <a href="./signUp.php" class="hover-text" id="signup">SignUp</a>
 <?php endif; ?>
 </nav>
 
