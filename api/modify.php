@@ -2,59 +2,64 @@
 session_start();
 require_once __DIR__ . '/../Model/User.php';
 
+header('Content-Type: application/json');
+
 $action = $_POST['accion'] ?? null;
 $userModel = new User();
 
-function redirect($url) {
-    header('Location: ' . $url);
+try {
+    if ($action !== 'modify') {
+        echo json_encode(['success' => false, 'message' => 'Acción no reconocida.']);
+        exit;
+    }
+
+    // Recogemos campos
+    $email = $_POST['email'] ?? '';
+    $username = $_POST['username'] ?? ($_SESSION['user']['username'] ?? null);
+    $telephone = $_POST['telephone'] ?? '';
+    $newPassword = $_POST['password'] ?? '';
+    $confirmPass = $_POST['confirm_password'] ?? '';
+
+    // Validaciones
+    if ($newPassword !== '' && $newPassword !== $confirmPass) {
+        echo json_encode(['success' => false, 'message' => 'Las contraseñas no son iguales']);
+        exit;
+    }
+
+    if (!preg_match('/^[0-9]{9}$/', $telephone)) {
+        echo json_encode(['success' => false, 'message' => 'Teléfono inválido. Debe tener 9 dígitos.']);
+        exit;
+    }
+
+    // Preparar datos para el modelo
+    $data = [
+        'email' => $email,
+        'username' => $username,
+        'telephone' => $telephone,
+        'password' => $newPassword // modifyUser entiende password vacío como "no cambiado"
+    ];
+
+    $modified = $userModel->modifyUser($data);
+
+    if ($modified) {
+        // actualizar sesión para que la vista disponga de datos nuevos
+        if (!empty($_SESSION['user'])) {
+            $_SESSION['user']['email'] = $email;
+            $_SESSION['user']['telephone'] = $telephone;
+            // username normalmente no cambia; si cambias username, actualiza aquí también.
+        }
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Usuario modificado correctamente.',
+            'user' => $_SESSION['user'] ?? null
+        ]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'No se pudo modificar el usuario.']);
+    }
+    exit;
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
     exit;
 }
-
-try {
-    if ($action === 'modify') {    
-
-        $email = $_POST['email'] ?? '';
-        $username = $_SESSION['user']['USERNAME'] ?? null; // El usuario logueado
-        $telephone = $_POST['telephone'] ?? '';
-        $newPassword = $_POST['password'] ?? '';
-        $confirmPass = $_POST['confirm_password'] ?? '';
-
-
-        if ($newPassword !== $confirmPass) {
-            $_SESSION['flash'] = 'Las contraseñas no son iguales';
-            redirect('../View/modify.php');
-        }
-
-        if (!preg_match('/^[0-9]{9}$/', $telephone)) {
-            $_SESSION['flash'] = 'Teléfono inválido. Debe tener 9 dígitos.';
-            redirect('../View/modify.php');
-        }
-
-        $data = [
-            'email' => $email,
-            'username' => $username,
-            'telephone' => $telephone,
-            'password' => $newPassword
-        ];
-
-        $modified = $userModel->modifyUser($data);
-
-            if ($modified) {
-                $_SESSION['flash'] = 'Usuario modificado correctamente.';
-            // Actualiza la sesión
-            $_SESSION['user']['EMAIL'] = $email;
-            $_SESSION['user']['TELEPHONE'] = $telephone;
-            redirect('../View/menu.php');
-            } else {
-                $_SESSION['flash'] = 'No se pudo modificar el usuario.';
-                redirect('../View/modify.php');
-            }
-    } else {
-        redirect('../View/menu.php');
-    }
-} catch (Exception $e) {
-    $_SESSION['flash'] = 'Error: ' . $e->getMessage();
-    redirect('../View/menu.php');
-}
-
 ?>

@@ -22,8 +22,8 @@ if (empty($_SESSION['user'])) {
         <?php if (!empty($_SESSION['user'])): ?>
             <span>Hola, <?php echo htmlspecialchars($_SESSION['user']['username']); ?></span>
             <a href="../api/logout.php" class="hover-text">Logout</a>
-            <a href=./modify.html class="hover-text">ModifyUser</a>
-            <a href=./delete.html class="hover-text">DeleteUser</a>
+            <a href=./modify.php class="hover-text">ModifyUser</a>
+            <a href=./delete.php class="hover-text">DeleteUser</a>
     </nav>
     <main class="glass-container">
         <p></p>
@@ -35,5 +35,6 @@ if (empty($_SESSION['user'])) {
 </nav>
 
 </body>
-
+<script src="../javaScript/deleteUser.js"></script>
+<script src="../javaScript/modifyUser.js"></script>
 </html>

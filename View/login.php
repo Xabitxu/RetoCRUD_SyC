@@ -45,7 +45,7 @@
                     <button type="submit" name="accion" value="login" id="login">Login</button>
                 </div>
                 <div class="contenedor-input">
-                    <a href="signUp.php" class="button-link" id="signup">Sign Up</a>
+                    <a href="signUp.php" class="button-link" id="signup-link">Sign Up</a>
                 </div>
             </div>
         </form>

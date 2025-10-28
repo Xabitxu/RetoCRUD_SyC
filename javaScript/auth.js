@@ -1,13 +1,20 @@
-document.getElementById('login').addEventListener('click', login);
-document.getElementById('signup').addEventListener('click', signup);
+const loginBtn = document.getElementById('login');
+const signupBtn = document.getElementById('signup');
 
+if (loginBtn) loginBtn.addEventListener('click', login);
+if (signupBtn) signupBtn.addEventListener('click', signup);
+
+// LOGIN
 async function login(event) {
   event.preventDefault();
 
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
   const formData = new FormData();
   formData.append('accion', 'login');
-  formData.append('email', document.getElementById('email').value);
-  formData.append('password', document.getElementById('password').value);
+  formData.append('email', email);
+  formData.append('password', password);
 
   try {
     const res = await fetch('../api/auth.php', {
@@ -17,10 +24,10 @@ async function login(event) {
     });
 
     const data = await res.json();
-    console.log(data); // para depuración
+    console.log(data);
 
     if (data.success) {
-      window.location.href = 'menu.php'; // ruta relativa desde login.php
+      window.location.href = 'menu.php';
     } else {
       alert(data.message);
     }
@@ -30,7 +37,13 @@ async function login(event) {
   }
 }
 
+// SIGNUP
 async function signup(event) {
+  // Si no hay campos de signup (estamos en login.php), no impedimos la navegación
+  if (!document.getElementById('username')) {
+    return;
+  }
+
   event.preventDefault();
 
   const formData = new FormData();
