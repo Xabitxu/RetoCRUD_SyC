@@ -75,5 +75,5 @@
         </form>
     </div>
 </body>
-<script src="../js/auth.js"></script>
+<script src="../javaScript/auth.js"></script>
 </html>

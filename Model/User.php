@@ -78,8 +78,46 @@ class User {
     }
 
     public function deleteUser($data) {
-        
+        try {
+            $pdo = $this->conn;
+            $username = $data['username'] ?? null;
+            $email = $data['email'] ?? null;
+
+            if (!$username && !$email) {
+                throw new Exception("Falta username o email para eliminar el usuario.");
+            }
+
+            $pdo->beginTransaction();
+
+            if ($username) {
+                $stmtUser = $pdo->prepare("DELETE FROM USER_ WHERE USERNAME = :username");
+                $stmtUser->execute([':username' => $username]);
+                $deletedUser = $stmtUser->rowCount();
+            } else {
+                $deletedUser = 0;
+            }
+
+            $stmtProfile = $pdo->prepare("DELETE FROM PROFILE_ WHERE (USERNAME = :username) OR (EMAIL = :email)");
+            $stmtProfile->execute([':username' => $username, ':email' => $email]);
+            $deletedProfile = $stmtProfile->rowCount();
+
+            $pdo->commit();
+
+            // Devuelve true si se borró al menos una fila
+            return ($deletedUser > 0 || $deletedProfile > 0);
+        } catch (PDOException $e) {
+            if (isset($pdo) && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            throw new Exception("Error al eliminar el usuario: " . $e->getMessage());
+        } catch (Exception $e) {
+            if (isset($pdo) && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            throw $e;
+        }
     }
+
     public function existsUsernameOrEmail($username, $email) {
         $sql = "SELECT 1 FROM PROFILE_ WHERE USERNAME = :u OR EMAIL = :e LIMIT 1";
         $stmt = $this->conn->prepare($sql);

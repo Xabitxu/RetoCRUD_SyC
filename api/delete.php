@@ -28,7 +28,7 @@ try {
     }
 
     $email = $_POST['email'] ?? null;
-    $username = $_SESSION['user']['username'] ?? null; 
+    $username = $_SESSION['user']['username'] ?? null;
 
     if (!$email) {
         echo json_encode([
@@ -46,8 +46,8 @@ try {
     $deleted = $userModel->deleteUser($data);
 
     if ($deleted) {
-        // Opcional: cerrar sesión si eliminaste al usuario actual
-        if ($username === $_SESSION['user']['username']) {
+        // cierra sesión si eliminas al usuario actual
+        if ($username === ($_SESSION['user']['username'] ?? null)) {
             session_destroy();
         }
 
@@ -68,3 +68,4 @@ try {
         'message' => 'Error: ' . $e->getMessage()
     ]);
 }
+?>

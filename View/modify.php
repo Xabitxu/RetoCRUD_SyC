@@ -11,53 +11,44 @@
 
 <body class="background">
     <nav class="texto-centrado">
-        <a href=./login.html class="hover-text">LogIn</a>
-        <a href=./signUp.html class="hover-text">SignUp</a>
-        <a href=./modify.html class="hover-text">ModifyUser</a>
-        <a href=./delete.html class="hover-text">DeleteUser</a>
+        <a href="./login.php" class="hover-text">LogIn</a>
+        <a href="./signUp.php" class="hover-text">SignUp</a>
+        <a href="./modify.php" class="hover-text">ModifyUser</a>
+        <a href="./delete.php" class="hover-text">DeleteUser</a>
     </nav>
     <div class="glass-container">
-    <a href=./menu.php class="hover-text"><svg class="goBack" viewBox="0 0 16 16"
-                xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                    <path fill="#000000" fill-rule="evenodd"
-                        d="M4.297105,3.29289 L0.59,7 L4.297105,10.7071 C4.687635,11.0976 5.320795,11.0976 5.711315,10.7071 C6.101845,10.3166 6.101845,9.68342 5.711315,9.29289 L4.418425,8 L11.504215,8 C12.332615,8 13.004215,8.67157 13.004215,9.5 C13.004215,10.3284 12.332615,11 11.504215,11 L10.004215,11 C9.451935,11 9.004215,11.4477 9.004215,12 C9.004215,12.5523 9.451935,13 10.004215,13 L11.504215,13 C13.437215,13 15.004215,11.433 15.004215,9.5 C15.004215,7.567 13.437215,6 11.504215,6 L4.418425,6 L5.711315,4.70711 C6.101845,4.31658 6.101845,3.68342 5.711315,3.29289 C5.320795,2.90237 4.687635,2.90237 4.297105,3.29289 Z">
-                    </path>
-                </g>
-            </svg>Go back</a>
+    <a href="./menu.php" class="hover-text">Go back</a>
         <h1>MODIFY USER</h1>
-    <form action="../api/auth.php" method="post">
+    <form id="modifyForm" action="../api/modify.php" method="post">
             <div class="contenedor-input">
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email" required>
             </div>
             <div class="contenedor-input">
                 <label for="username">Username</label>
-                <input type="text" name="username" value="<?= $_SESSION['user']['USERNAME'] ?>" readonly>
+                <input type="text" name="username" value="<?= $_SESSION['user']['USERNAME'] ?? '' ?>" readonly>
             </div>
             <div class="contenedor-input">
                 <label for="telephone">Telephone</label>
                 <input type="text" id="telephone" name="telephone" required>
             </div>
             <div class="contenedor-input">
-                <label for="newPassword">New Password</label>
-                <input type="password" id="newPassword" name="newPassword" required>
+                <label for="password">New Password</label>
+                <input type="password" id="password" name="password" required>
             </div>
 
             <div class="contenedor-input">
-                <label for="confirmNewPassword">Confirm New Password</label>
-                <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                <label for="confirm_password">Confirm New Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
             </div>
 
             <div class="labels">
                 <div class="contenedor-input">
-                    <button type="submit" name="accion" value="saveChanges">Save changes</button>
+                    <button type="submit" name="accion" value="modify">Save changes</button>
                 </div>
             </div>
         </form>
     </div>
 </body>
-
+<script src="../javaScript/modifyUser.js"></script>
 </html>

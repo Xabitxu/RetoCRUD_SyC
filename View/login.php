@@ -38,7 +38,7 @@
             </div>
             <div class="contenedor-input">
                 <label for="password">Password</label>
-                <input type="text" id="password" name="password" required>
+                <input type="password" id="password" name="password" required>
             </div>
             <div class="labels">
                 <div class="contenedor-input">
@@ -51,5 +51,5 @@
         </form>
     </div>
 </body>
-<script src="../js/auth.js"></script>
+<script src="../javaScript/auth.js"></script>
 </html>
