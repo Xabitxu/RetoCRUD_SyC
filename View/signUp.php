@@ -3,7 +3,7 @@
 <html lang="es">
 
 <head>
-    <link rel="stylesheet" href="styles/signUp.css">
+    <link rel="stylesheet" href="styles/logIn.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
@@ -69,7 +69,7 @@
                     <button type="submit" name="accion" value="signup" id="signup">Sign Up</button>
                 </div>
                 <div class="contenedor-input">
-                    <a href="login.php" class="button-link" id="login">Login</a>
+                    <a href="login.php" class="button-link">Login</a>
                 </div>
             </div>
         </form>

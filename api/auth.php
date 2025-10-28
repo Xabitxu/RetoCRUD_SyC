@@ -18,6 +18,9 @@ try {
             $_SESSION['user'] = [
                 'username' => $row['USERNAME'],
                 'email' => $row['EMAIL'] ?? $identifier,
+                'name_' => $row['NAME'] ?? '',
+                'surname' => $row['SURNAME'] ?? '',
+                'telephone' => $row['TELEPHONE'] ?? '',
                 'role' => $row['role'] ?? 'user'
             ];
             echo json_encode([

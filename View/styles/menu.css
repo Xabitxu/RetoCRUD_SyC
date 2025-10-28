@@ -64,12 +64,12 @@ h1 {
 a {
     color:rgb(0, 0, 0);
     text-decoration: none;
-    font-size: 20px;
-    padding:7px;
+    padding:8px;
+    border-radius: 20px;
 }
 
 a:hover {
-    background-color: rgb(179, 252, 252);
+    background-color: rgb(111, 159, 159);
 }
 
 body {
@@ -82,3 +82,27 @@ body {
     background-repeat: no-repeat;
     font-family: sans-serif;
 }
+
+
+.vertical-links {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    color: white;
+    width: 200px;
+    text-decoration: none;
+    gap: 20px;
+    
+}
+.vertical-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 5%;
+    margin: 15%;
+    width: 300px;
+    color: white;
+    border: 3px solid white;
+    border-radius: 5px;
+}
+
