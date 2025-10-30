@@ -15,9 +15,11 @@ if (empty($_SESSION['user'])) {
 </head>
 
 <body class="background">
+    
     <nav class="texto-centrado">
-        <span>
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 25px; height: 25px;">
+        <span style="border-right:1px solid #000;height:25px">
+
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 25px; height: 25px; position: relative; top: 5px; ">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -30,10 +32,14 @@ if (empty($_SESSION['user'])) {
             </svg>
             <?php echo htmlspecialchars($_SESSION['user']['username']); ?>
         </span>
+
         <a href="../api/logout.php" class="hover-text">Logout</a>
 
 
+
+
     </nav>
+
     <div class="glass-container">
         <a href="./menu.php" class="hover-text">
             <svg width="20" height="15" viewBox="0 0 24 24">

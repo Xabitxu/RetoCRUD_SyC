@@ -2,8 +2,6 @@
     display: flex;
     flex-direction: column;
     width: 300px;
-    gap: 5px;
-    padding: 10px;
 }
 
 .opciones {
@@ -35,18 +33,15 @@ button {
 }
 
 .glass-container {
-   background: rgba(38, 136, 248, 0.2);
+    background: rgba(38, 136, 248, 0.2);
     border-radius: 20px;
     backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(70px);
     box-shadow: 0 8px 32px rgba(55, 174, 255, 3);
-    padding: 40px 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 92%;
-    height: 64vh;
-
+    height: 75vh;
+    margin-top: 5px;
 }
 
 h1 {
@@ -58,13 +53,13 @@ h1 {
     background-color: rgb(211, 249, 249);
     border-radius: 20px;
     text-align: end; 
-    padding: 5px;
+    padding: 5px 5px 15px 5px;
 }
 
 a {
     color:rgb(0, 0, 0);
     text-decoration: none;
-    padding:8px;
+    padding:10px;
     border-radius: 20px;
 }
 

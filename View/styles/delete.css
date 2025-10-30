@@ -1,7 +1,7 @@
 .contenedor-input {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;  
     gap: 5px;
     padding: 2px;
 }
@@ -9,16 +9,21 @@
 button {
     width: 300px;
     margin-top: 40px;
-    padding: 5px;
+    padding: 5px 0 5px 0;
     border-radius: 20px;
-    background-color:rgb(39, 39, 39);
+    background-color: rgb(39, 39, 39);
     color: aliceblue;
-    border-color: aliceblue;
+    text-decoration: none;
+    border: 2px solid aliceblue;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .texto-centrado {
     text-align: end; 
-    padding: 5px;
+    padding: 5px 5px 15px 5px;
     background-color: rgb(211, 249, 249);
     border-radius: 20px;
     width: 100%;
@@ -27,8 +32,8 @@ button {
 a {
     color:rgb(0, 0, 0);
     text-decoration: none;
-    font-size: 20px;
-    padding:7px;
+    padding:10px;
+    border-radius: 20px;
 }
 
 a:hover {
