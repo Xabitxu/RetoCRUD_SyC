@@ -50,6 +50,7 @@ if (empty($_SESSION['user'])) {
                 <p><strong>Name:</strong> <?= htmlspecialchars($_SESSION['user']['name'] ?? 'N/A') ?></p>
                 <p><strong>Surname:</strong> <?= htmlspecialchars($_SESSION['user']['surname'] ?? 'N/A') ?></p>
                 <p><strong>Telephone:</strong> <?= htmlspecialchars($_SESSION['user']['telephone'] ?? 'N/A') ?></p>
+                <p><strong>Role:</strong> <?= htmlspecialchars($_SESSION['user']['role'] ?? 'N/A') ?></p>
             </div>
 
             <div class="vertical-links" style="text-align: left;">

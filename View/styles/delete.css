@@ -56,11 +56,12 @@ a:hover {
 }
 
 .background {
-    background-image: url('../img/paisaje.jpg');
-    background-size: cover;
-    background-position: center;
+    background-image: url('../img/wallpaper.jpg');
+    background-attachment:fixed;
     background-repeat: no-repeat;
+    background-size: cover;
 }
+
 
 body {
     display: flex;

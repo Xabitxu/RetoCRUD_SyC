@@ -47,15 +47,25 @@ if (empty($_SESSION['user'])) {
             13H9l1-2h3.5a4.5 4.5 0 1 0 0-9H7.2l2.1 3H6.8L4.4 8.6L4 8z" />
             </svg> Go back</a>
         <h1>DELETE USER</h1>
+
+            <div>
+                <!-- si es admin mostrar combobox -->
+                <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                    <label for="role">User</label>
+                    <select id="role" name="role"></select>
+                <?php endif; ?>
+            </div>
+
+
+
         <form id="deleteForm" action="../api/delete.php" method="post">
             <div class="contenedor-input">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?= htmlspecialchars($_SESSION['user']['email'] ?? '') ?>" readonly>
+                <input type="email" id="email" name="email" value="<?= ($_SESSION['user']['role'] !== 'admin') ? htmlspecialchars($_SESSION['user']['email'] ?? '') : '' ?>" readonly>
             </div>
             <div class="contenedor-input">
                 <label for="username">Username</label>
-                <!-- usamos la clave 'username' que guarda auth.php -->
-                <input type="text" id="username" name="username" value="<?= htmlspecialchars($_SESSION['user']['username'] ?? '') ?>" readonly>
+                <input type="text" id="username" name="username" value="<?= ($_SESSION['user']['role'] !== 'admin') ? htmlspecialchars($_SESSION['user']['username'] ?? '') : '' ?>" readonly>
             </div>
             <div class="contenedor-input">
                 <button type="submit" id="delete" name="accion" value="delete">Delete Account</button>
@@ -64,5 +74,6 @@ if (empty($_SESSION['user'])) {
     </div>
 </body>
 <script src="../javaScript/deleteUser.js"></script>
+<script src="../javaScript/updateCombobox.js"></script>
 
 </html>

@@ -5,39 +5,50 @@ require_once __DIR__ . '/../Model/User.php';
 header('Content-Type: application/json');
 
 $action = $_POST['accion'] ?? null;
-$userModel = new User();
+
+
+
+
+
+function logIn()
+{
+    $userModel = new User();
+    $identifier = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    // Buscar usuario por username o email
+    $row = $userModel->getByIdentifier($identifier);
+
+    if ($row && $row['PASSWORD_'] === $password) {
+        $_SESSION['user'] = [
+            'username' => $row['USERNAME'],
+            'email' => $row['EMAIL'] ?? $identifier,
+            'name' => $row['NAME_'] ?? '',
+            'surname' => $row['SURNAME'] ?? '',
+            'telephone' => $row['TELEPHONE'] ?? '',
+            'role' => $row['role'] ?? 'user'
+        ];
+        echo json_encode([
+            'success' => true,
+            'message' => 'Login correcto',
+            'user' => $_SESSION['user']
+        ]);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Credenciales inválidas'
+        ]);
+    }
+}
 
 try {
     if ($action === 'login') {
-        $identifier = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
 
-        $row = $userModel->getByIdentifier($identifier);
-
-        if ($row && $row['PASSWORD_'] === $password) {
-            $_SESSION['user'] = [
-                'username' => $row['USERNAME'],
-                'email' => $row['EMAIL'] ?? $identifier,
-                'name_' => $row['NAME'] ?? '',
-                'surname' => $row['SURNAME'] ?? '',
-                'telephone' => $row['TELEPHONE'] ?? '',
-                'role' => $row['role'] ?? 'user'
-            ];
-            echo json_encode([
-                'success' => true,
-                'message' => 'Login correcto',
-                'user' => $_SESSION['user']
-            ]);
-        } else {
-            echo json_encode([
-                'success' => false,
-                'message' => 'Credenciales inválidas'
-            ]);
-        }
+        logIn();
         exit;
-    }
+    } elseif ($action === 'signup') {
+        $userModel = new User();
 
-    elseif ($action === 'signup') {
         $email = $_POST['email'] ?? '';
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
@@ -68,7 +79,7 @@ try {
             exit;
         }
 
-        $allowedGenders = ['female','male','other'];
+        $allowedGenders = ['female', 'male', 'other'];
         if (!in_array($gender, $allowedGenders)) {
             echo json_encode(['success' => false, 'message' => 'Género inválido.']);
             exit;
@@ -89,37 +100,21 @@ try {
 
         if ($created) {
             $row = $userModel->getByIdentifier($username ?? $email);
-            if ($row) {
-                $_SESSION['user'] = [
-                    'username' => $row['USERNAME'],
-                    'email' => $row['EMAIL'] ?? $email ?? $username,
-                    'role' => $row['role'] ?? 'user'
-                ];
-                echo json_encode([
-                    'success' => true,
-                    'message' => 'Usuario creado y sesión iniciada correctamente.',
-                    'user' => $_SESSION['user']
-                ]);
-            } else {
-                echo json_encode(['success' => true, 'message' => 'Registro completo. Puedes iniciar sesión.']);
-            }
+            logIn();
         } else {
             echo json_encode(['success' => false, 'message' => 'No se pudo crear el usuario.']);
         }
         exit;
-    }
-
-    elseif ($action === 'logout') {
+    } elseif ($action === 'logout') {
+        session_start();
+        session_unset();
         session_destroy();
-        echo json_encode(['success' => true, 'message' => 'Sesión cerrada.']);
+        header('Location: ../View/login.php');
         exit;
-    }
-
-    else {
+    } else {
         echo json_encode(['success' => false, 'message' => 'Acción no reconocida.']);
         exit;
     }
-
 } catch (Exception $e) {
     echo json_encode([
         'success' => false,
@@ -127,4 +122,3 @@ try {
     ]);
     exit;
 }
-?>

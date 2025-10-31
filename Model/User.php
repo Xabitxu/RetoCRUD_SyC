@@ -93,8 +93,13 @@ class User {
                 $stmtUser = $pdo->prepare("DELETE FROM USER_ WHERE USERNAME = :username");
                 $stmtUser->execute([':username' => $username]);
                 $deletedUser = $stmtUser->rowCount();
+
+                $stmtAdmin = $pdo->prepare("DELETE FROM ADMIN_ WHERE USERNAME = :username");
+                $stmtAdmin->execute([':username' => $username]);
+                $deletedAdmin = $stmtAdmin->rowCount();
             } else {
                 $deletedUser = 0;
+                $deletedAdmin = 0;
             }
 
             $stmtProfile = $pdo->prepare("DELETE FROM PROFILE_ WHERE (USERNAME = :username) OR (EMAIL = :email)");
@@ -104,7 +109,7 @@ class User {
             $pdo->commit();
 
             // Devuelve true si se borró al menos una fila
-            return ($deletedUser > 0 || $deletedProfile > 0);
+            return ($deletedUser > 0 || $deletedAdmin > 0 || $deletedProfile > 0);
         } catch (PDOException $e) {
             if (isset($pdo) && $pdo->inTransaction()) {
                 $pdo->rollBack();

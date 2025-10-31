@@ -20,8 +20,11 @@ async function deleteUser(event) {
 
     if (data.success) {
       alert(data.message || 'Usuario eliminado correctamente.');
-      // Si borras el usuario, vuelve al login
-      window.location.href = 'login.php';
+      if (data.isCurrentUser) {
+        window.location.href = '../View/login.php';
+      }else{
+        window.location.reload();
+      }
     } else {
       alert(data.message || 'No se pudo eliminar el usuario.');
     }

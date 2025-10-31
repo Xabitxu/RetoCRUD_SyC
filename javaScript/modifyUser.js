@@ -10,8 +10,6 @@ async function modifyUser(event) {
 
   try {
     const apiUrl = new URL('../api/modify.php', location.href).href;
-    console.log('Enviar petición a:', apiUrl);
-
     const res = await fetch(apiUrl, {
       method: 'POST',
       body: formData,

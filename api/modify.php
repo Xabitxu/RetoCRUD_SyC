@@ -1,6 +1,40 @@
 <?php
 session_start();
+require_once __DIR__ . '/../Config/Database.php';
 require_once __DIR__ . '/../Model/User.php';
+
+function getAllUsernames($conn) {
+    $stmt = $conn->prepare("SELECT username FROM user_");
+    $stmt->execute();
+    $usernames = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $usernames[] = $row['username'];
+    }
+    return $usernames;
+}
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') {
+    header('Content-Type: application/json');
+    $database = new Database();
+    $conn = $database->getConnection();
+
+    if (isset($_GET['username'])) {
+        $username = $_GET['username'];
+        $stmt = $conn->prepare("SELECT username, email, telephone FROM profile_ WHERE username = :username LIMIT 1");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        echo json_encode($data ?: []);
+        exit();
+    }
+
+    echo json_encode(getAllUsernames($conn));
+    exit();
+}
+
+
 
 header('Content-Type: application/json');
 
@@ -41,12 +75,11 @@ try {
 
     $modified = $userModel->modifyUser($data);
 
-    if ($modified) {
-        // actualizar sesión para que la vista disponga de datos nuevos
-        if (!empty($_SESSION['user'])) {
+    if ($modified ) {
+        // actualizar datos en sesion si es el usuario logueado
+        if (!empty($_SESSION['user'])&& $_POST['username'] === ($_SESSION['user']['username'])) {
             $_SESSION['user']['email'] = $email;
             $_SESSION['user']['telephone'] = $telephone;
-            // username normalmente no cambia; si cambias username, actualiza aquí también.
         }
 
         echo json_encode([

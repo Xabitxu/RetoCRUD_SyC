@@ -18,17 +18,8 @@ try {
         exit;
     }
 
-    // Comprobar usuario logueado
-    if (empty($_SESSION['user'])) {
-        echo json_encode([
-            'success' => false,
-            'message' => 'No has iniciado sesión.'
-        ]);
-        exit;
-    }
-
     $email = $_POST['email'] ?? null;
-    $username = $_SESSION['user']['username'] ?? null;
+    $username = $_POST['username'] ?? null;
 
     if (!$email) {
         echo json_encode([
@@ -47,13 +38,17 @@ try {
 
     if ($deleted) {
         // cierra sesión si eliminas al usuario actual
-        if ($username === ($_SESSION['user']['username'] ?? null)) {
+        $currentUsername = $_SESSION['user']['username'] ?? null;
+        $currentEmail = $_SESSION['user']['email'] ?? null;
+        $isCurrentUser = (($username && $username === $currentUsername) || ($email && $email === $currentEmail));
+        if ($isCurrentUser) {
+            session_unset();
             session_destroy();
         }
-
         echo json_encode([
             'success' => true,
-            'message' => 'Usuario eliminado correctamente.'
+            'message' => 'Usuario eliminado correctamente.',
+            'isCurrentUser' => $isCurrentUser
         ]);
     } else {
         echo json_encode([
