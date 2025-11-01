@@ -35,7 +35,7 @@ button {
 .glass-container {
     background: rgba(38, 136, 248, 0.2);
     border-radius: 20px;
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(25px);
     box-shadow: 0 8px 32px rgba(55, 174, 255, 3);
     display: flex;
     justify-content: center;
@@ -82,24 +82,38 @@ body {
 
 
 .vertical-links {
-    display: flex;
-    flex-direction: column;
-    text-align: right;
-    color: white;
-    width: 200px;
+    display: inline-block;
+    text-align: center;
+    width: 30vw;
+    padding: 25px 0 25px 0;
+    border-radius: 20px;
+    background-color: rgb(39, 39, 39);
+    color: aliceblue;
     text-decoration: none;
-    gap: 20px;
-    
+    border: 2px solid aliceblue;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px;
 }
+.vertical-links:hover {
+    background-color: rgba(154, 111, 209, 0.6);
+}
+
+.vl-delete:hover {
+    background-color: rgba(255, 65, 65, 0.6);
+}
+
 .vertical-info {
     display: flex;
     flex-direction: column;
     text-align: left;
     padding: 5%;
     margin: 15%;
-    width: 300px;
-    color: white;
-    border: 3px solid white;
+    width: 25vw;
+    color: aliceblue;
+    border: 3px solid aliceblue;
     border-radius: 5px;
 }
 

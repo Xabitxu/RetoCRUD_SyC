@@ -70,7 +70,7 @@ try {
         'email' => $email,
         'username' => $username,
         'telephone' => $telephone,
-        'password' => $newPassword // modifyUser entiende password vacío como "no cambiado"
+        'password' => $newPassword ? password_hash($newPassword, PASSWORD_BCRYPT) : '' 
     ];
 
     $modified = $userModel->modifyUser($data);

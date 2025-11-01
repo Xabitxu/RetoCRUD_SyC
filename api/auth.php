@@ -19,7 +19,7 @@ function logIn()
     // Buscar usuario por username o email
     $row = $userModel->getByIdentifier($identifier);
 
-    if ($row && $row['PASSWORD_'] === $password) {
+    if ($row && password_verify($password, $row['PASSWORD_'])) {
         $_SESSION['user'] = [
             'username' => $row['USERNAME'],
             'email' => $row['EMAIL'] ?? $identifier,
@@ -87,7 +87,7 @@ try {
 
         $data = [
             'username' => $username,
-            'password' => $password,
+            'password' => password_hash($password, PASSWORD_BCRYPT),
             'email' => $email,
             'name' => $name,
             'surname' => $surname,

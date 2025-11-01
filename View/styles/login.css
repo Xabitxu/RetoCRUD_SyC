@@ -44,7 +44,7 @@ button, .button-link {
 .glass-container {
     background: rgba(255, 255, 255, 0.2); 
     border-radius: 20px; 
-    backdrop-filter: blur(10px); 
+    backdrop-filter: blur(25px); 
     -webkit-backdrop-filter: blur(10px); 
     padding: 40px 50px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
@@ -69,4 +69,6 @@ body {
     min-height: 90vh;
     font-family: sans-serif;
     background-color: rgb(0, 40, 71);
+    color: aliceblue;
+    font-size: 16px;
 }

@@ -31,17 +31,12 @@ if (empty($_SESSION['user'])) {
             </svg>
             <?php echo htmlspecialchars($_SESSION['user']['username']); ?>
         </span>
-
-        <a href="../api/logout.php" class="hover-text">Logout</a>
-
-
-
-
+        <a href="../api/logout.php" class="hover-text" style="color:black;">Logout</a>
     </nav>
     <div class="glass-container">
         <a href="./menu.php" class="hover-text">
             <svg width="20" height="15" viewBox="0 0 24 24">
-                <path fill="#000000" d="M4.4 7.4L6.8 4h2.5L7.2 7h6.3a6.5 6.5 0 0 1 0
+                <path fill="#ffffffff" d="M4.4 7.4L6.8 4h2.5L7.2 7h6.3a6.5 6.5 0 0 1 0
             13H9l1-2h3.5a4.5 4.5 0 1 0 0-9H7.2l2.1 3H6.8L4.4 8.6L4 8z" />
             </svg> Go back</a>
 
@@ -66,6 +61,7 @@ if (empty($_SESSION['user'])) {
                 <label for="telephone">Telephone</label>
                 <input type="text" id="telephone" name="telephone" value="<?= htmlspecialchars($_SESSION['user']['telephone'] ?? '') ?>" required>
             </div>
+            <hr>
             <div class="contenedor-input">
                 <label for="password">New Password</label>
                 <input type="password" id="password" name="password">

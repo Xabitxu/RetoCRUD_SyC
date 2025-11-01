@@ -4,6 +4,12 @@ if (deleteForm) deleteForm.addEventListener('submit', deleteUser);
 async function deleteUser(event) {
   event.preventDefault();
 
+  // popup confirmacion
+  const confirmed = confirm('¿Estás seguro de que deseas eliminar esta cuenta? Esta acción no se puede deshacer.');
+  if (!confirmed) {
+    return;
+  }
+
   const form = document.getElementById('deleteForm');
   const formData = new FormData(form);
   formData.set('accion', 'delete');

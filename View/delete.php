@@ -32,33 +32,29 @@ if (empty($_SESSION['user'])) {
             </svg>
             <?php echo htmlspecialchars($_SESSION['user']['username']); ?>
         </span>
-
-        <a href="../api/logout.php" class="hover-text">Logout</a>
-
-
-
-
+        <a href="../api/logout.php" class="hover-text" style="color:black;">Logout</a>
     </nav>
 
     <div class="glass-container">
         <a href="./menu.php" class="hover-text">
             <svg width="20" height="15" viewBox="0 0 24 24">
-                <path fill="#000000" d="M4.4 7.4L6.8 4h2.5L7.2 7h6.3a6.5 6.5 0 0 1 0
+                <path fill="#ffffffff" d="M4.4 7.4L6.8 4h2.5L7.2 7h6.3a6.5 6.5 0 0 1 0
             13H9l1-2h3.5a4.5 4.5 0 1 0 0-9H7.2l2.1 3H6.8L4.4 8.6L4 8z" />
             </svg> Go back</a>
         <h1>DELETE USER</h1>
 
-            <div>
-                <!-- si es admin mostrar combobox -->
-                <?php if ($_SESSION['user']['role'] === 'admin'): ?>
-                    <label for="role">User</label>
-                    <select id="role" name="role"></select>
-                <?php endif; ?>
-            </div>
+           
 
 
 
         <form id="deleteForm" action="../api/delete.php" method="post">
+             <div class="contenedor-input">
+                <!-- si es admin mostrar combobox -->
+                <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                    <label for="role" style="color: aliceblue;">User</label>
+                    <select id="role" name="role"></select>
+                <?php endif; ?>
+            </div>
             <div class="contenedor-input">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" value="<?= ($_SESSION['user']['role'] !== 'admin') ? htmlspecialchars($_SESSION['user']['email'] ?? '') : '' ?>" readonly>

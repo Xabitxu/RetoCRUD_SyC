@@ -53,9 +53,9 @@ if (empty($_SESSION['user'])) {
                 <p><strong>Role:</strong> <?= htmlspecialchars($_SESSION['user']['role'] ?? 'N/A') ?></p>
             </div>
 
-            <div class="vertical-links" style="text-align: left;">
-                <a href="./modify.php" class="hover-text" style="background-color: rgba(95, 95, 255, 1);">Modify User</a>
-                <a href="./delete.php" class="hover-text" style="background-color: rgba(255, 95, 95, 1);">Delete User</a>
+            <div>
+                <a href="./modify.php" class="vertical-links">MODIFY</a>
+                <a href="./delete.php" class="vertical-links vl-delete">DELETE</a>
             </div>
 
 

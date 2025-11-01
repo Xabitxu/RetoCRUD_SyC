@@ -3,7 +3,7 @@ USE CRUD;
 
 CREATE TABLE PROFILE_ (
 USERNAME VARCHAR(40) PRIMARY KEY,
-PASSWORD_ VARCHAR(40),
+PASSWORD_ VARCHAR(60),
 EMAIL VARCHAR(40) UNIQUE ,
 USER_CODE INT AUTO_INCREMENT UNIQUE,
 NAME_ VARCHAR(40),
@@ -28,13 +28,23 @@ CURRENT_ACCOUNT VARCHAR(40),
 FOREIGN KEY (USERNAME) REFERENCES PROFILE_ (USERNAME)
 );
 
+-- jlopez: pass123
+-- mramirez: pass456
+-- cperez: pass789
+-- asanchez: qwerty (admin)
+-- rluna: zxcvbn (admin)
+-- a: a (admin)
+-- b: b (admin)
+
 INSERT INTO PROFILE_ (USERNAME, PASSWORD_, EMAIL, USER_CODE, NAME_, TELEPHONE, SURNAME)
 VALUES
-('jlopez', 'pass123', 'jlopez@example.com', 101, 'Juan', '987654321', 'Lopez'),
-('mramirez', 'pass456', 'mramirez@example.com', 102, 'Maria', '912345678', 'Ramirez'),
-('cperez', 'pass789', 'cperez@example.com', 103, 'Carlos', '934567890', 'Perez'),
-('asanchez', 'qwerty', 'asanchez@example.com', 104, 'Ana', '900112233', 'Sanchez'),
-('rluna', 'zxcvbn', 'rluna@example.com', 105, 'Rosa', '955667788', 'Luna');
+('jlopez', '$2y$10$mUdZCGK6qlqfBrRiOOerluif6FZdLNeVVW8ln7hSt2cw9wiR0rHU6', 'jlopez@example.com', 101, 'Juan', '987654321', 'Lopez'),
+('mramirez', '$2y$10$K0Wgt6YWim6kMqpWlyE0VeDYtxe/ln1eZyUYZ0dwB4veTGRjOediq', 'mramirez@example.com', 102, 'Maria', '912345678', 'Ramirez'),
+('cperez', '$2y$10$UlZ/t21QiGYItXQkgeWmROk25I1bp112VgFicnflv3KWx37MqQ9h.', 'cperez@example.com', 103, 'Carlos', '934567890', 'Perez'),
+('asanchez', '$2y$10$FhgliU5M6dTSquGEddiwVusxcRr6NA5gVItbnpldjeEWz5XiyYkaW', 'asanchez@example.com', 104, 'Ana', '900112233', 'Sanchez'),
+('rluna', '$2y$10$AafdSHEHc17u7Ms4VFLLfO7vSO9KuKsXw0yUNHrSuik8xAEONHTam', 'rluna@example.com', 105, 'Rosa', '955667788', 'Luna'),
+('a', '$2y$10$Bkg2D0arux4eXeQ2NCjHgum7nbUUKew9WFoLHML8sqoeqX49aXO0a', 'a@admin.com', 106, 'Admin', '900000001', 'A'),
+('b', '$2y$10$PCu4TkaMylE2kyBfSSC2w.1K3K3Jwvf..wlpxhOgl2y4bNwPFA3ZK', 'b@admin.com', 107, 'Admin', '900000002', 'B');
 
 INSERT INTO USER_ (USERNAME, GENDER, CARD_NUMBER)
 VALUES
@@ -45,4 +55,6 @@ VALUES
 INSERT INTO ADMIN_ (USERNAME, CURRENT_ACCOUNT)
 VALUES
 ('asanchez', 'CTA-001'),
-('rluna', 'CTA-002');
+('rluna', 'CTA-002'),
+('a', 'CTA-003'),
+('b', 'CTA-004');
